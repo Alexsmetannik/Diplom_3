@@ -21,6 +21,8 @@ public class RegistrationPage {
     private static final By passwordField = By.xpath(".//input[@name='Пароль']");
     private static final By registrationButton = By.xpath("//button[text()='Зарегистрироваться']");
     private static final By errorMessage = By.xpath("//p[text()='Некорректный пароль']");
+    private static final By loginButton = By.xpath(".//a[text()='Войти']");
+
 
 
     @Step("Регистрация пользователя")
@@ -39,6 +41,11 @@ public class RegistrationPage {
             return true;
         }
         return false;
+    }
+
+    @Step("Нажатие на кнопку 'Войти'")
+    public void clickOnLoginButton() {
+        driver.findElement(loginButton).click();
     }
 
 }

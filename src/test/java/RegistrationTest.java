@@ -17,6 +17,7 @@ public class RegistrationTest {
     @Rule
     public DriverRule driverRule = new DriverRule();
 
+    private final static String baseURL = "https://stellarburgers.nomoreparties.site/";
     private String email;
     private String password;
     private String name;
@@ -34,7 +35,7 @@ public class RegistrationTest {
     @Description("Успешная регистрация пользователя")
     public void successfulRegistrationTest() {
         WebDriver driver = driverRule.getDriver();
-        driver.get("https://stellarburgers.nomoreparties.site/");
+        driver.get(baseURL);
 
         MainPage mainPage = new MainPage(driver);
         LoginPage loginPage = new LoginPage(driver);
@@ -44,7 +45,7 @@ public class RegistrationTest {
         registrationPage.regUser(name, email, password);
         loginPage.loginUser(email, password);
         boolean actualResult = mainPage.isMainPageOpenedWithLogin();
-        assertTrue(actualResult);
+        assertTrue("User is not login",actualResult);
     }
 
     @Test
@@ -52,7 +53,7 @@ public class RegistrationTest {
     @Description("Проверка ошибки при регистрации для некорректного пароля. Минимальный пароль — шесть символов.")
     public void errorRegistrationIncorrectPasswordTest() {
         WebDriver driver = driverRule.getDriver();
-        driver.get("https://stellarburgers.nomoreparties.site/");
+        driver.get(baseURL);
 
         MainPage mainPage = new MainPage(driver);
         LoginPage loginPage = new LoginPage(driver);
@@ -61,6 +62,6 @@ public class RegistrationTest {
         loginPage.clickOnRegistrationButton();
         registrationPage.regUser(name, email, errorPassword);
         boolean actualResult = registrationPage.hasErrorMessage();
-        assertTrue(actualResult);
+        assertTrue("Message not exist", actualResult);
     }
 }
