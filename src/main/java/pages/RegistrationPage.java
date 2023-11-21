@@ -20,6 +20,7 @@ public class RegistrationPage {
     private static final By emailField = By.xpath(".//fieldset[2]/div/div/input");
     private static final By passwordField = By.xpath(".//input[@name='Пароль']");
     private static final By registrationButton = By.xpath("//button[text()='Зарегистрироваться']");
+    private static final By errorMessage = By.xpath("//p[text()='Некорректный пароль']");
 
 
     @Step("Регистрация пользователя")
@@ -30,6 +31,14 @@ public class RegistrationPage {
         driver.findElement(emailField).sendKeys(email);
         driver.findElement(passwordField).sendKeys(password);
         driver.findElement(registrationButton).click();
+    }
+
+    @Step("Проверка отображения ошибки некорректного пароля")
+    public boolean hasErrorMessage() {
+        if (driver.findElement(errorMessage).isDisplayed()) {
+            return true;
+        }
+        return false;
     }
 
 }

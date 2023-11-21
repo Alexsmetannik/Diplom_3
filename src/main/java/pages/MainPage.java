@@ -31,7 +31,7 @@ public class MainPage {
     }
 
     @Step("Проверка успешности авторизации")
-    public Boolean isMainPageOpenedWithLogin() {
+    public boolean isMainPageOpenedWithLogin() {
         if (driver.findElement(makeOrderButton).isDisplayed()) {
             return true;
         }

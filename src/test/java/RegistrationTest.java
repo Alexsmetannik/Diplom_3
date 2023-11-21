@@ -20,6 +20,7 @@ public class RegistrationTest {
     private String email;
     private String password;
     private String name;
+    private final static String errorPassword = "1234";
 
     @Before
     public void beforeRegistrationTest(){
@@ -44,6 +45,22 @@ public class RegistrationTest {
         loginPage.loginUser(email, password);
         boolean actualResult = mainPage.isMainPageOpenedWithLogin();
         assertTrue(actualResult);
+    }
 
+    @Test
+    @DisplayName("Check error during registration for an incorrect password")
+    @Description("Проверка ошибки при регистрации для некорректного пароля. Минимальный пароль — шесть символов.")
+    public void errorRegistrationIncorrectPasswordTest() {
+        WebDriver driver = driverRule.getDriver();
+        driver.get("https://stellarburgers.nomoreparties.site/");
+
+        MainPage mainPage = new MainPage(driver);
+        LoginPage loginPage = new LoginPage(driver);
+        RegistrationPage registrationPage = new RegistrationPage(driver);
+        mainPage.clickOnLoginButton();
+        loginPage.clickOnRegistrationButton();
+        registrationPage.regUser(name, email, errorPassword);
+        boolean actualResult = registrationPage.hasErrorMessage();
+        assertTrue(actualResult);
     }
 }
