@@ -10,7 +10,7 @@ public class DriverRule extends ExternalResource {
     WebDriver driver;
 
     @Override
-    protected void before() throws Throwable {
+    protected void before() {
         System.setProperty("webdriver.http.factory", "jdk-http-client");
         ChromeDriverService service = new ChromeDriverService.Builder()
                 .usingDriverExecutable(new File("C:/Users/Alex/projects/WebDriver/bin/chromedriver/chromedriver"))
