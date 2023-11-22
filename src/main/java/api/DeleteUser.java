@@ -3,7 +3,7 @@ package api;
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
 
-import static config.Enviroment.baseURL;
+import static config.Enviroment.apiURL;
 import static io.restassured.RestAssured.given;
 
 public class DeleteUser {
@@ -15,7 +15,7 @@ public class DeleteUser {
                  // .log().all()
                 .auth().oauth2(token)
                 .when()
-                .delete(baseURL + pathDelete)
+                .delete(apiURL + pathDelete)
                 .then();
                 //.log().all();
     }

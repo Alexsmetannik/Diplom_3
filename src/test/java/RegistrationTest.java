@@ -30,6 +30,7 @@ public class RegistrationTest {
     private DeleteUser deleteUser;
     private String bearerToken;
     private String token;
+    private boolean isCreatedUser;
 
     @Before
     public void beforeRegistrationTest(){
@@ -41,13 +42,15 @@ public class RegistrationTest {
 
     @After
     public void deleteUser() {
-        ValidatableResponse responseLogin = loginUser.loginUserRequest(loginUser);
-        bearerToken = responseLogin.extract().path("accessToken");
-        token = bearerToken.substring(7);
+        if (isCreatedUser) {
+            ValidatableResponse responseLogin = loginUser.loginUserRequest(loginUser);
+            bearerToken = responseLogin.extract().path("accessToken");
+            token = bearerToken.substring(7);
 
-        deleteUser = new DeleteUser();
-        if(token != null){
-            deleteUser.deleteUserRequest(token);
+            deleteUser = new DeleteUser();
+            if (token != null) {
+                deleteUser.deleteUserRequest(token);
+            }
         }
     }
 
@@ -55,6 +58,7 @@ public class RegistrationTest {
     @DisplayName("Check successful user registration")
     @Description("Успешная регистрация пользователя")
     public void successfulRegistrationTest() {
+        isCreatedUser = true;
         WebDriver driver = driverRule.getDriver();
         driver.get(baseURL);
 
@@ -73,6 +77,7 @@ public class RegistrationTest {
     @DisplayName("Check error during registration for an incorrect password")
     @Description("Проверка ошибки при регистрации для некорректного пароля. Минимальный пароль — шесть символов.")
     public void errorRegistrationIncorrectPasswordTest() {
+        isCreatedUser = false;
         WebDriver driver = driverRule.getDriver();
         driver.get(baseURL);
 

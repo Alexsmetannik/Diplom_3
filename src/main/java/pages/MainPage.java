@@ -16,7 +16,7 @@ public class MainPage {
     }
 
     private static final By mainHeader = By.xpath("//h1[text()='Соберите бургер']");
-    private static final By loginButton = By.xpath("//button[text()='Войти в аккаунт']");
+    private static final By loginButton = By.xpath(".//button[text()='Войти в аккаунт']");
     private static final By makeOrderButton = By.xpath("//button[text()='Оформить заказ']");
     private static final By accountButton = By.xpath("//p[text()='Личный Кабинет']");
 

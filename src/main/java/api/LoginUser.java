@@ -4,7 +4,7 @@ import io.qameta.allure.Step;
 import io.restassured.http.ContentType;
 import io.restassured.response.ValidatableResponse;
 
-import static config.Enviroment.baseURL;
+import static config.Enviroment.apiURL;
 import static io.restassured.RestAssured.given;
 
 public class LoginUser {
@@ -27,7 +27,7 @@ public class LoginUser {
                 .contentType(ContentType.JSON)
                 .body(loginUser)
                 .when()
-                .post(baseURL + pathLogin)
+                .post(apiURL + pathLogin)
                 .then();
         //  .log().all();
     }

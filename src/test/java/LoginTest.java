@@ -1,6 +1,10 @@
+import api.DeleteUser;
+import api.LoginUser;
 import generators.DataGenerator;
 import io.qameta.allure.junit4.DisplayName;
+import io.restassured.response.ValidatableResponse;
 import jdk.jfr.Description;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -21,6 +25,10 @@ public class LoginTest {
     private String email;
     private String password;
     private String name;
+    private LoginUser loginUser;
+    private DeleteUser deleteUser;
+    private String bearerToken;
+    private String token;
 
 
     @Before
@@ -28,6 +36,19 @@ public class LoginTest {
         email = DataGenerator.getNewEmail();
         password = DataGenerator.getNewPassword();
         name = DataGenerator.getNewName();
+        loginUser = new LoginUser(email, password);
+    }
+
+    @After
+    public void deleteUser() {
+        ValidatableResponse responseLogin = loginUser.loginUserRequest(loginUser);
+        bearerToken = responseLogin.extract().path("accessToken");
+        token = bearerToken.substring(7);
+
+        deleteUser = new DeleteUser();
+        if(token != null){
+            deleteUser.deleteUserRequest(token);
+        }
     }
 
     @Test
@@ -63,7 +84,6 @@ public class LoginTest {
         loginPage.clickOnRegistrationButton();
         registrationPage.regUser(name, email, password);
 
-        mainPage.clickOnAccountButton();
         loginPage.loginUser(email, password);
         boolean actualResult = mainPage.isMainPageOpenedWithLogin();
         assertTrue("User is not login", actualResult);
@@ -83,7 +103,6 @@ public class LoginTest {
         loginPage.clickOnRegistrationButton();
         registrationPage.regUser(name, email, password);
 
-        mainPage.clickOnLoginButton();
         loginPage.clickOnRegistrationButton();
         registrationPage.clickOnLoginButton();
         loginPage.loginUser(email, password);
@@ -106,7 +125,6 @@ public class LoginTest {
         loginPage.clickOnRegistrationButton();
         registrationPage.regUser(name, email, password);
 
-        mainPage.clickOnLoginButton();
         loginPage.clickOnRecoveryButton();
         recoveryPage.clickOnLoginButton();
         loginPage.loginUser(email, password);
