@@ -13,6 +13,7 @@ import org.openqa.selenium.WebDriver;
 import pages.LoginPage;
 import pages.MainPage;
 import pages.RegistrationPage;
+import static config.Enviroment.baseURL;
 
 import static org.junit.Assert.*;
 
@@ -21,7 +22,6 @@ public class RegistrationTest {
     @Rule
     public DriverRule driverRule = new DriverRule();
 
-    private final static String baseURL = "https://stellarburgers.nomoreparties.site/";
     private String email;
     private String password;
     private String name;
