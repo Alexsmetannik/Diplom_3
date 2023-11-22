@@ -1,6 +1,10 @@
+import api.DeleteUser;
+import api.LoginUser;
 import generators.DataGenerator;
 import io.qameta.allure.junit4.DisplayName;
+import io.restassured.response.ValidatableResponse;
 import jdk.jfr.Description;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -22,12 +26,29 @@ public class RegistrationTest {
     private String password;
     private String name;
     private final static String errorPassword = "1234";
+    private LoginUser loginUser;
+    private DeleteUser deleteUser;
+    private String bearerToken;
+    private String token;
 
     @Before
     public void beforeRegistrationTest(){
         email = DataGenerator.getNewEmail();
         password = DataGenerator.getNewPassword();
         name = DataGenerator.getNewName();
+        loginUser = new LoginUser(email, password);
+    }
+
+    @After
+    public void deleteUser() {
+        ValidatableResponse responseLogin = loginUser.loginUserRequest(loginUser);
+        bearerToken = responseLogin.extract().path("accessToken");
+        token = bearerToken.substring(7);
+
+        deleteUser = new DeleteUser();
+        if(token != null){
+            deleteUser.deleteUserRequest(token);
+        }
     }
 
     @Test
