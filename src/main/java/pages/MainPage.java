@@ -19,6 +19,7 @@ public class MainPage {
     private static final By loginButton = By.xpath(".//button[text()='Войти в аккаунт']");
     private static final By makeOrderButton = By.xpath("//button[text()='Оформить заказ']");
     private static final By accountButton = By.xpath("//p[text()='Личный Кабинет']");
+    private static final By headText = By.xpath(".//h1[text()='Соберите бургер']");
 
 
     public void waitForLoadHeaderMainPage(WebDriver driver){
@@ -42,5 +43,13 @@ public class MainPage {
     @Step("Нажатие на кнопку 'Личный кабинет'")
     public void clickOnAccountButton() {
         driver.findElement(accountButton).click();
+    }
+
+    @Step("Заголовок 'Соберите бургер' отображается")
+    public Boolean isHeadTextOpened() {
+        if (driver.findElement(headText).isDisplayed())  {
+            return true;
+        }
+        return false;
     }
 }

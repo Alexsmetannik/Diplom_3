@@ -46,4 +46,13 @@ public class LoginPage {
         ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", element);
         driver.findElement(recoveryButton).click();
     }
+
+    @Step("Переход на экран авторизации")
+    public Boolean isLoginPageOpened() {
+        if (driver.findElement(loginHeader).isDisplayed())  {
+            return true;
+        }
+        return false;
+    }
+
 }
