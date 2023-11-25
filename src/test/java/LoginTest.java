@@ -24,7 +24,6 @@ public class LoginTest {
 
     private String email;
     private String password;
-    private String name;
     private User user;
     private UserClient userClient;
     private String bearerToken;
@@ -32,20 +31,19 @@ public class LoginTest {
 
 
     @Before
-    public void beforeRegistrationTest(){
-        email = DataGenerator.getNewEmail();
-        password = DataGenerator.getNewPassword();
-        name = DataGenerator.getNewName();
+    public void beforeLoginTest(){
         userClient = new UserClient();
-        user = new User(email, password);
+        user = DataGenerator.getSuccessCreateUser();
+        email = user.getEmail();
+        password = user.getPassword();
+
+        ValidatableResponse responseCreate = userClient.createUserRequest(user);
+        bearerToken = responseCreate.extract().path("accessToken");
+        token = bearerToken.substring(7);
     }
 
     @After
     public void deleteUser() {
-        ValidatableResponse responseLogin = userClient.loginUserRequest(user);
-        bearerToken = responseLogin.extract().path("accessToken");
-        token = bearerToken.substring(7);
-
         if(token != null){
             userClient.deleteUserRequest(token);
         }
@@ -60,11 +58,7 @@ public class LoginTest {
 
         MainPage mainPage = new MainPage(driver);
         LoginPage loginPage = new LoginPage(driver);
-        RegistrationPage registrationPage = new RegistrationPage(driver);
         mainPage.clickOnLoginButton();
-        loginPage.clickOnRegistrationButton();
-        registrationPage.regUser(name, email, password);
-
         loginPage.loginUser(email, password);
         boolean actualResult = mainPage.isMainPageOpenedWithLogin();
         assertTrue("User is not login", actualResult);
@@ -79,11 +73,7 @@ public class LoginTest {
 
         MainPage mainPage = new MainPage(driver);
         LoginPage loginPage = new LoginPage(driver);
-        RegistrationPage registrationPage = new RegistrationPage(driver);
-        mainPage.clickOnLoginButton();
-        loginPage.clickOnRegistrationButton();
-        registrationPage.regUser(name, email, password);
-
+        mainPage.clickOnAccountButton();
         loginPage.loginUser(email, password);
         boolean actualResult = mainPage.isMainPageOpenedWithLogin();
         assertTrue("User is not login", actualResult);
@@ -101,9 +91,6 @@ public class LoginTest {
         RegistrationPage registrationPage = new RegistrationPage(driver);
         mainPage.clickOnLoginButton();
         loginPage.clickOnRegistrationButton();
-        registrationPage.regUser(name, email, password);
-
-        loginPage.clickOnRegistrationButton();
         registrationPage.clickOnLoginButton();
         loginPage.loginUser(email, password);
         boolean actualResult = mainPage.isMainPageOpenedWithLogin();
@@ -119,12 +106,8 @@ public class LoginTest {
 
         MainPage mainPage = new MainPage(driver);
         LoginPage loginPage = new LoginPage(driver);
-        RegistrationPage registrationPage = new RegistrationPage(driver);
         RecoveryPage recoveryPage = new RecoveryPage(driver);
         mainPage.clickOnLoginButton();
-        loginPage.clickOnRegistrationButton();
-        registrationPage.regUser(name, email, password);
-
         loginPage.clickOnRecoveryButton();
         recoveryPage.clickOnLoginButton();
         loginPage.loginUser(email, password);

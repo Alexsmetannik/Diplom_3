@@ -1,3 +1,4 @@
+import api.LoginUser;
 import api.User;
 import api.UserClient;
 import generators.DataGenerator;
@@ -22,35 +23,35 @@ public class RegistrationTest {
     @Rule
     public DriverRule driverRule = new DriverRule();
 
-    private String email;
-    private String password;
-    private String name;
-    private final static String ERROR_PASSWORD = "1234";
+    private String newEmail;
+    private String newPassword;
+    private String newName;
+    private final static String ERROR_PASSWORD = "12345";
     private User user;
     private UserClient userClient;
+    private LoginUser login;
     private String bearerToken;
     private String token;
     private boolean isCreatedUser;
 
     @Before
     public void beforeRegistrationTest(){
-        email = DataGenerator.getNewEmail();
-        password = DataGenerator.getNewPassword();
-        name = DataGenerator.getNewName();
         userClient = new UserClient();
-        user = new User(email, password);
+        newEmail = DataGenerator.getNewEmail();
+        newPassword = DataGenerator.getNewPassword();
+        newName = DataGenerator.getNewName();
+        user = new User(newEmail, newPassword, newName);
+        login = new LoginUser();
+        System.out.println();
     }
 
     @After
     public void deleteUser() {
         if (isCreatedUser) {
-            ValidatableResponse responseLogin = userClient.loginUserRequest(user);
+            ValidatableResponse responseLogin = userClient.loginUserRequest(login.from(user));
             bearerToken = responseLogin.extract().path("accessToken");
             token = bearerToken.substring(7);
-
-            if(token != null){
-                userClient.deleteUserRequest(token);
-            }
+            userClient.deleteUserRequest(token);
         }
     }
 
@@ -67,8 +68,8 @@ public class RegistrationTest {
         RegistrationPage registrationPage = new RegistrationPage(driver);
         mainPage.clickOnLoginButton();
         loginPage.clickOnRegistrationButton();
-        registrationPage.regUser(name, email, password);
-        loginPage.loginUser(email, password);
+        registrationPage.regUser(newName, newEmail, newPassword);
+        loginPage.loginUser(newEmail, newPassword);
         boolean actualResult = mainPage.isMainPageOpenedWithLogin();
         assertTrue("User is not login",actualResult);
     }
@@ -86,7 +87,7 @@ public class RegistrationTest {
         RegistrationPage registrationPage = new RegistrationPage(driver);
         mainPage.clickOnLoginButton();
         loginPage.clickOnRegistrationButton();
-        registrationPage.regUser(name, email, ERROR_PASSWORD);
+        registrationPage.regUser(newName, newEmail, ERROR_PASSWORD);
         boolean actualResult = registrationPage.hasErrorMessage();
         assertTrue("Message not exist", actualResult);
     }

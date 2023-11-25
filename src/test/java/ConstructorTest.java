@@ -20,30 +20,28 @@ public class ConstructorTest{
     @Rule
     public DriverRule driverRule = new DriverRule();
 
-    private String email;
-    private String password;
-    private String name;
     private User user;
     private UserClient userClient;
     private String bearerToken;
     private String token;
+    private String email;
+    private String password;
 
 
     @Before
-    public void beforeRegistrationTest(){
-        email = DataGenerator.getNewEmail();
-        password = DataGenerator.getNewPassword();
-        name = DataGenerator.getNewName();
+    public void beforeConstructorTest(){
         userClient = new UserClient();
-        user = new User(email, password);
+        user = DataGenerator.getSuccessCreateUser();
+        email = user.getEmail();
+        password = user.getPassword();
+
+        ValidatableResponse responseCreate = userClient.createUserRequest(user);
+        bearerToken = responseCreate.extract().path("accessToken");
+        token = bearerToken.substring(7);
     }
 
     @After
     public void deleteUser() {
-        ValidatableResponse responseLogin = userClient.loginUserRequest(user);
-        bearerToken = responseLogin.extract().path("accessToken");
-        token = bearerToken.substring(7);
-
         if(token != null){
             userClient.deleteUserRequest(token);
         }
@@ -58,13 +56,8 @@ public class ConstructorTest{
 
         MainPage mainPage = new MainPage(driver);
         LoginPage loginPage = new LoginPage(driver);
-        RegistrationPage registrationPage = new RegistrationPage(driver);
         mainPage.clickOnLoginButton();
-        loginPage.clickOnRegistrationButton();
-        registrationPage.regUser(name, email, password);
-
         loginPage.loginUser(email, password);
-
         mainPage.clickOnSaucesTab();
         mainPage.clickOnRollsTab();
         boolean actualResult = mainPage.isRollsTextOpened();
@@ -80,13 +73,8 @@ public class ConstructorTest{
 
         MainPage mainPage = new MainPage(driver);
         LoginPage loginPage = new LoginPage(driver);
-        RegistrationPage registrationPage = new RegistrationPage(driver);
         mainPage.clickOnLoginButton();
-        loginPage.clickOnRegistrationButton();
-        registrationPage.regUser(name, email, password);
-
         loginPage.loginUser(email, password);
-
         mainPage.clickOnSaucesTab();
         boolean actualResult = mainPage.isSaucesTextOpened();
         assertTrue("Tab is not correct", actualResult);
@@ -101,13 +89,8 @@ public class ConstructorTest{
 
         MainPage mainPage = new MainPage(driver);
         LoginPage loginPage = new LoginPage(driver);
-        RegistrationPage registrationPage = new RegistrationPage(driver);
         mainPage.clickOnLoginButton();
-        loginPage.clickOnRegistrationButton();
-        registrationPage.regUser(name, email, password);
-
         loginPage.loginUser(email, password);
-
         mainPage.clickOnFillingsTab();
         boolean actualResult = mainPage.isFillingsTextOpened();
         assertTrue("Tab is not correct", actualResult);
