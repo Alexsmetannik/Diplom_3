@@ -1,5 +1,5 @@
-import api.DeleteUser;
-import api.LoginUser;
+import api.User;
+import api.UserClient;
 import generators.DataGenerator;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.ValidatableResponse;
@@ -13,7 +13,7 @@ import org.openqa.selenium.WebDriver;
 import pages.LoginPage;
 import pages.MainPage;
 import pages.RegistrationPage;
-import static config.Enviroment.baseURL;
+import static config.Enviroment.*;
 
 import static org.junit.Assert.*;
 
@@ -25,9 +25,9 @@ public class RegistrationTest {
     private String email;
     private String password;
     private String name;
-    private final static String errorPassword = "1234";
-    private LoginUser loginUser;
-    private DeleteUser deleteUser;
+    private final static String ERROR_PASSWORD = "1234";
+    private User user;
+    private UserClient userClient;
     private String bearerToken;
     private String token;
     private boolean isCreatedUser;
@@ -37,19 +37,19 @@ public class RegistrationTest {
         email = DataGenerator.getNewEmail();
         password = DataGenerator.getNewPassword();
         name = DataGenerator.getNewName();
-        loginUser = new LoginUser(email, password);
+        userClient = new UserClient();
+        user = new User(email, password);
     }
 
     @After
     public void deleteUser() {
         if (isCreatedUser) {
-            ValidatableResponse responseLogin = loginUser.loginUserRequest(loginUser);
+            ValidatableResponse responseLogin = userClient.loginUserRequest(user);
             bearerToken = responseLogin.extract().path("accessToken");
             token = bearerToken.substring(7);
 
-            deleteUser = new DeleteUser();
-            if (token != null) {
-                deleteUser.deleteUserRequest(token);
+            if(token != null){
+                userClient.deleteUserRequest(token);
             }
         }
     }
@@ -60,7 +60,7 @@ public class RegistrationTest {
     public void successfulRegistrationTest() {
         isCreatedUser = true;
         WebDriver driver = driverRule.getDriver();
-        driver.get(baseURL);
+        driver.get(BASE_URL);
 
         MainPage mainPage = new MainPage(driver);
         LoginPage loginPage = new LoginPage(driver);
@@ -79,14 +79,14 @@ public class RegistrationTest {
     public void errorRegistrationIncorrectPasswordTest() {
         isCreatedUser = false;
         WebDriver driver = driverRule.getDriver();
-        driver.get(baseURL);
+        driver.get(BASE_URL);
 
         MainPage mainPage = new MainPage(driver);
         LoginPage loginPage = new LoginPage(driver);
         RegistrationPage registrationPage = new RegistrationPage(driver);
         mainPage.clickOnLoginButton();
         loginPage.clickOnRegistrationButton();
-        registrationPage.regUser(name, email, errorPassword);
+        registrationPage.regUser(name, email, ERROR_PASSWORD);
         boolean actualResult = registrationPage.hasErrorMessage();
         assertTrue("Message not exist", actualResult);
     }

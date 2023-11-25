@@ -1,5 +1,5 @@
-import api.DeleteUser;
-import api.LoginUser;
+import api.User;
+import api.UserClient;
 import generators.DataGenerator;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.ValidatableResponse;
@@ -13,7 +13,7 @@ import pages.AccountPage;
 import pages.LoginPage;
 import pages.MainPage;
 import pages.RegistrationPage;
-import static config.Enviroment.baseURL;
+import static config.Enviroment.*;
 
 import static org.junit.Assert.assertTrue;
 
@@ -24,8 +24,8 @@ public class DifferentTransitionsTest {
     private String email;
     private String password;
     private String name;
-    private LoginUser loginUser;
-    private DeleteUser deleteUser;
+    private User user;
+    private UserClient userClient;
     private String bearerToken;
     private String token;
 
@@ -35,18 +35,18 @@ public class DifferentTransitionsTest {
         email = DataGenerator.getNewEmail();
         password = DataGenerator.getNewPassword();
         name = DataGenerator.getNewName();
-        loginUser = new LoginUser(email, password);
+        userClient = new UserClient();
+        user = new User(email, password);
     }
 
     @After
     public void deleteUser() {
-        ValidatableResponse responseLogin = loginUser.loginUserRequest(loginUser);
+        ValidatableResponse responseLogin = userClient.loginUserRequest(user);
         bearerToken = responseLogin.extract().path("accessToken");
         token = bearerToken.substring(7);
 
-        deleteUser = new DeleteUser();
         if(token != null){
-            deleteUser.deleteUserRequest(token);
+            userClient.deleteUserRequest(token);
         }
     }
 
@@ -55,7 +55,7 @@ public class DifferentTransitionsTest {
     @Description("Переход по клику на 'Личный кабинет' после авторизации")
     public void transitionByClickOnAccountButtonTest() {
         WebDriver driver = driverRule.getDriver();
-        driver.get(baseURL);
+        driver.get(BASE_URL);
 
         MainPage mainPage = new MainPage(driver);
         LoginPage loginPage = new LoginPage(driver);
@@ -76,7 +76,7 @@ public class DifferentTransitionsTest {
     @Description("Переход из личного кабинета в конструктор по клику на 'Конструктор' после авторизации")
     public void transitionByClickOnConstructorTest() {
         WebDriver driver = driverRule.getDriver();
-        driver.get(baseURL);
+        driver.get(BASE_URL);
 
         MainPage mainPage = new MainPage(driver);
         LoginPage loginPage = new LoginPage(driver);
@@ -98,7 +98,7 @@ public class DifferentTransitionsTest {
     @Description("Переход из личного кабинета в конструктор по клику на логотип 'Stellar Burgers' после авторизации")
     public void transitionByClickOnStellarBurgersTest() {
         WebDriver driver = driverRule.getDriver();
-        driver.get(baseURL);
+        driver.get(BASE_URL);
 
         MainPage mainPage = new MainPage(driver);
         LoginPage loginPage = new LoginPage(driver);
@@ -120,7 +120,7 @@ public class DifferentTransitionsTest {
     @Description("Выход из аккаунта")
     public void logoutTest() {
         WebDriver driver = driverRule.getDriver();
-        driver.get(baseURL);
+        driver.get(BASE_URL);
 
         MainPage mainPage = new MainPage(driver);
         LoginPage loginPage = new LoginPage(driver);

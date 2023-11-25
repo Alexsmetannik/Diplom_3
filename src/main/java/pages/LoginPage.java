@@ -17,39 +17,39 @@ public class LoginPage {
         this.driver = driver;
     }
 
-    private static final By loginHeader = By.xpath("//h2[text()='Вход']");
-    private static final By registrationButton = By.xpath(".//a[text()='Зарегистрироваться']");
-    private static final By emailField = By.xpath(".//input[@type ='text']");
-    private static final By passwordField = By.xpath(".//input[@type ='password']");
-    private static final By loginButton = By.xpath(".//button[text()='Войти']");
-    private static final By recoveryButton = By.xpath(".//a[@class='Auth_link__1fOlj' and text()='Восстановить пароль']");
+    private static final By LOGIN_HEADER = By.xpath("//h2[text()='Вход']");
+    private static final By REGISTRATION_BUTTON = By.xpath(".//a[text()='Зарегистрироваться']");
+    private static final By EMAIL_FIELD = By.xpath(".//input[@type ='text']");
+    private static final By PASSWORD_FIELD = By.xpath(".//input[@type ='password']");
+    private static final By LOGIN_BUTTON = By.xpath(".//button[text()='Войти']");
+    private static final By RECOVERY_BUTTON = By.xpath(".//a[@class='Auth_link__1fOlj' and text()='Восстановить пароль']");
 
     @Step("Нажатие на кнопку 'Зарегистрироваться'")
     public void clickOnRegistrationButton() {
-        WebElement element = driver.findElement(registrationButton);
+        WebElement element = driver.findElement(REGISTRATION_BUTTON);
         ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", element);
-        driver.findElement(registrationButton).click();
+        driver.findElement(REGISTRATION_BUTTON).click();
     }
 
     @Step("Авторизация пользователя")
     public void loginUser(String email, String password) {
         new WebDriverWait(driver, Duration.ofSeconds(5))
-                .until(ExpectedConditions.visibilityOfElementLocated(loginHeader));
-        driver.findElement(emailField).sendKeys(email);
-        driver.findElement(passwordField).sendKeys(password);
-        driver.findElement(loginButton).click();
+                .until(ExpectedConditions.visibilityOfElementLocated(LOGIN_HEADER));
+        driver.findElement(EMAIL_FIELD).sendKeys(email);
+        driver.findElement(PASSWORD_FIELD).sendKeys(password);
+        driver.findElement(LOGIN_BUTTON).click();
     }
 
     @Step("Нажатие на кнопку 'Восстановить пароль'")
     public void clickOnRecoveryButton() {
-        WebElement element = driver.findElement(recoveryButton);
+        WebElement element = driver.findElement(RECOVERY_BUTTON);
         ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", element);
-        driver.findElement(recoveryButton).click();
+        driver.findElement(RECOVERY_BUTTON).click();
     }
 
     @Step("Переход на экран авторизации")
     public Boolean isLoginPageOpened() {
-        if (driver.findElement(loginHeader).isDisplayed())  {
+        if (driver.findElement(LOGIN_HEADER).isDisplayed())  {
             return true;
         }
         return false;

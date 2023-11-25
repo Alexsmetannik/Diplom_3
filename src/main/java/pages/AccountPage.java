@@ -13,14 +13,14 @@ public class AccountPage {
         this.driver = driver;
     }
 
-    private static final By profileText = By.xpath("//a[text()='Профиль']");
-    private static final By constructorButton = By.xpath("//p[text()='Конструктор']");
-    private static final By logoStellarBurgers = By.xpath(".//div[@class='AppHeader_header__logo__2D0X2']/a");
-    private static final By exitButton = By.xpath(".//li/button[text()='Выход']");
+    private static final By PROFILE_TEXT = By.xpath("//a[text()='Профиль']");
+    private static final By CONSTRUCTOR_BUTTON = By.xpath("//p[text()='Конструктор']");
+    private static final By LOGO_STELLAR_BURGERS = By.xpath(".//div[@class='AppHeader_header__logo__2D0X2']/a");
+    private static final By EXIT_BUTTON = By.xpath(".//li/button[text()='Выход']");
 
     @Step("Проверка открытия экрана личного кабинета")
     public boolean isAccountPageOpened() {
-        if (driver.findElement(profileText).isDisplayed()) {
+        if (driver.findElement(PROFILE_TEXT).isDisplayed()) {
             return true;
         }
         return false;
@@ -28,22 +28,22 @@ public class AccountPage {
 
     @Step("Нажатие на кнопку 'Конструктор'")
     public void clickOnConstructorButton() {
-        WebElement element = driver.findElement(constructorButton);
+        WebElement element = driver.findElement(CONSTRUCTOR_BUTTON);
         ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", element);
-        driver.findElement(constructorButton).click();
+        driver.findElement(CONSTRUCTOR_BUTTON).click();
     }
 
     @Step("Нажатие на логотип 'StellarBurgers'")
     public void clickOnLogoStellarBurgers() {
-        WebElement element = driver.findElement(logoStellarBurgers);
+        WebElement element = driver.findElement(LOGO_STELLAR_BURGERS);
         ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", element);
-        driver.findElement(logoStellarBurgers).click();
+        driver.findElement(LOGO_STELLAR_BURGERS).click();
     }
 
     @Step("Нажатие на кнопку 'Выход'")
     public void clickOnExitButton() {
-        WebElement element = driver.findElement(exitButton);
+        WebElement element = driver.findElement(EXIT_BUTTON);
         ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", element);
-        driver.findElement(exitButton).click();
+        driver.findElement(EXIT_BUTTON).click();
     }
 }

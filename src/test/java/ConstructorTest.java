@@ -1,5 +1,5 @@
-import api.DeleteUser;
-import api.LoginUser;
+import api.User;
+import api.UserClient;
 import generators.DataGenerator;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.ValidatableResponse;
@@ -12,7 +12,7 @@ import org.openqa.selenium.WebDriver;
 import pages.LoginPage;
 import pages.MainPage;
 import pages.RegistrationPage;
-import static config.Enviroment.baseURL;
+import static config.Enviroment.*;
 
 import static org.junit.Assert.assertTrue;
 
@@ -23,8 +23,8 @@ public class ConstructorTest{
     private String email;
     private String password;
     private String name;
-    private LoginUser loginUser;
-    private DeleteUser deleteUser;
+    private User user;
+    private UserClient userClient;
     private String bearerToken;
     private String token;
 
@@ -34,18 +34,18 @@ public class ConstructorTest{
         email = DataGenerator.getNewEmail();
         password = DataGenerator.getNewPassword();
         name = DataGenerator.getNewName();
-        loginUser = new LoginUser(email, password);
+        userClient = new UserClient();
+        user = new User(email, password);
     }
 
     @After
     public void deleteUser() {
-        ValidatableResponse responseLogin = loginUser.loginUserRequest(loginUser);
+        ValidatableResponse responseLogin = userClient.loginUserRequest(user);
         bearerToken = responseLogin.extract().path("accessToken");
         token = bearerToken.substring(7);
 
-        deleteUser = new DeleteUser();
         if(token != null){
-            deleteUser.deleteUserRequest(token);
+            userClient.deleteUserRequest(token);
         }
     }
 
@@ -54,7 +54,7 @@ public class ConstructorTest{
     @Description("Переход к разделу 'Булки' после авторизации")
     public void transitionToRollsTest() {
         WebDriver driver = driverRule.getDriver();
-        driver.get(baseURL);
+        driver.get(BASE_URL);
 
         MainPage mainPage = new MainPage(driver);
         LoginPage loginPage = new LoginPage(driver);
@@ -65,8 +65,8 @@ public class ConstructorTest{
 
         loginPage.loginUser(email, password);
 
-        mainPage.clickOnFillingTab();
-        mainPage.clickOnBunTab();
+        mainPage.clickOnSaucesTab();
+        mainPage.clickOnRollsTab();
         boolean actualResult = mainPage.isRollsTextOpened();
         assertTrue("Tab is not correct", actualResult);
     }
@@ -76,7 +76,7 @@ public class ConstructorTest{
     @Description("Переход к разделу 'Соусы' после авторизации")
     public void transitionToSaucesTest() {
         WebDriver driver = driverRule.getDriver();
-        driver.get(baseURL);
+        driver.get(BASE_URL);
 
         MainPage mainPage = new MainPage(driver);
         LoginPage loginPage = new LoginPage(driver);
@@ -87,7 +87,7 @@ public class ConstructorTest{
 
         loginPage.loginUser(email, password);
 
-        mainPage.clickOnSauceTab();
+        mainPage.clickOnSaucesTab();
         boolean actualResult = mainPage.isSaucesTextOpened();
         assertTrue("Tab is not correct", actualResult);
     }
@@ -97,7 +97,7 @@ public class ConstructorTest{
     @Description("Переход к разделу 'Начинки' после авторизации")
     public void transitionToFillingsTest() {
         WebDriver driver = driverRule.getDriver();
-        driver.get(baseURL);
+        driver.get(BASE_URL);
 
         MainPage mainPage = new MainPage(driver);
         LoginPage loginPage = new LoginPage(driver);
@@ -108,7 +108,7 @@ public class ConstructorTest{
 
         loginPage.loginUser(email, password);
 
-        mainPage.clickOnFillingTab();
+        mainPage.clickOnFillingsTab();
         boolean actualResult = mainPage.isFillingsTextOpened();
         assertTrue("Tab is not correct", actualResult);
     }

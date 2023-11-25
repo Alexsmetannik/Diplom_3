@@ -4,11 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4df6422b-50e5-4302-978e-254ff9d8fa3c" name="Changes" comment="add ConstructorTest">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/chromedriver.exe" afterDir="false" />
+    <list default="true" id="4df6422b-50e5-4302-978e-254ff9d8fa3c" name="Changes" comment="add YandexDriver">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/api/DeleteUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/api/UserClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/api/LoginUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/api/User.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/config/Enviroment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/config/Enviroment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pages/AccountPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pages/AccountPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pages/LoginPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pages/LoginPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pages/MainPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pages/MainPage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/pages/RecoveryPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pages/RecoveryPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pages/RegistrationPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pages/RegistrationPage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/ConstructorTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ConstructorTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/DifferentTransitionsTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/DifferentTransitionsTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/DriverRule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/DriverRule.java" afterDir="false" />
@@ -52,7 +57,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "last_opened_file_path": "C:/Users/Alex/projects/Diplom/Diplom_3/src/main/resources",
+    "last_opened_file_path": "C:/Users/Alex/projects/Diplom/Diplom_3",
     "project.structure.last.edited": "Facets",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2"
@@ -62,13 +67,26 @@
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Alex\projects\Diplom\Diplom_3\src\main\resources" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Alex\projects\Diplom\Diplom_3\src\main\resources" />
+    </key>
   </component>
-  <component name="RunManager" selected="JUnit.RegistrationTest.errorRegistrationIncorrectPasswordTest">
+  <component name="RunManager" selected="JUnit.RegistrationTest">
     <configuration name="ConstructorTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Diplom_3" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="ConstructorTest" />
       <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ConstructorTest.transitionToRollsTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Diplom_3" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="ConstructorTest" />
+      <option name="METHOD_NAME" value="transitionToRollsTest" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -82,43 +100,31 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="DifferentTransitionsTest.logoutTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="LoginTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Diplom_3" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="DifferentTransitionsTest" />
-      <option name="METHOD_NAME" value="logoutTest" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="MAIN_CLASS_NAME" value="LoginTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="RegistrationTest.errorRegistrationIncorrectPasswordTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="RegistrationTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Diplom_3" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="RegistrationTest" />
-      <option name="METHOD_NAME" value="errorRegistrationIncorrectPasswordTest" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="RegistrationTest.successfulRegistrationTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Diplom_3" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="RegistrationTest" />
-      <option name="METHOD_NAME" value="successfulRegistrationTest" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.RegistrationTest.errorRegistrationIncorrectPasswordTest" />
-        <item itemvalue="JUnit.ConstructorTest" />
-        <item itemvalue="JUnit.RegistrationTest.successfulRegistrationTest" />
+        <item itemvalue="JUnit.RegistrationTest" />
+        <item itemvalue="JUnit.LoginTest" />
         <item itemvalue="JUnit.DifferentTransitionsTest" />
-        <item itemvalue="JUnit.DifferentTransitionsTest.logoutTest" />
+        <item itemvalue="JUnit.ConstructorTest.transitionToRollsTest" />
+        <item itemvalue="JUnit.ConstructorTest" />
       </list>
     </recent_temporary>
   </component>
@@ -195,7 +201,15 @@
       <option name="project" value="LOCAL" />
       <updated>1700677419560</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="add YandexDriver">
+      <option name="closed" value="true" />
+      <created>1700682686661</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1700682686661</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -207,6 +221,7 @@
     <MESSAGE value="update LoginTest" />
     <MESSAGE value="add DifferentTransitionsTest" />
     <MESSAGE value="add ConstructorTest" />
-    <option name="LAST_COMMIT_MESSAGE" value="add ConstructorTest" />
+    <MESSAGE value="add YandexDriver" />
+    <option name="LAST_COMMIT_MESSAGE" value="add YandexDriver" />
   </component>
 </project>

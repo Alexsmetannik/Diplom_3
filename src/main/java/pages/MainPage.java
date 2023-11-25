@@ -11,25 +11,25 @@ public class MainPage {
         this.driver = driver;
     }
 
-    private static final By loginButton = By.xpath(".//button[text()='Войти в аккаунт']");
-    private static final By makeOrderButton = By.xpath("//button[text()='Оформить заказ']");
-    private static final By accountButton = By.xpath("//p[text()='Личный Кабинет']");
-    private static final By headText = By.xpath(".//h1[text()='Соберите бургер']");
-    private static final By rollsTab = By.xpath(".//section[@class='BurgerIngredients_ingredients__1N8v2']/div/div[1]");
-    private static final By rollsText = By.xpath("//h2[text()='Булки']");
-    private static final By saucesTab = By.xpath(".//section[@class='BurgerIngredients_ingredients__1N8v2']/div/div[2]");
-    private static final By saucesText = By.xpath("//h2[text()='Соусы']");
-    private static final By fillingsTab = By.xpath(".//section[@class='BurgerIngredients_ingredients__1N8v2']/div/div[3]");
-    private static final By fillingsText = By.xpath("//h2[text()='Соусы']");
+    private static final By LOGIN_BUTTON = By.xpath(".//button[text()='Войти в аккаунт']");
+    private static final By MAKE_ORDER_BUTTON = By.xpath("//button[text()='Оформить заказ']");
+    private static final By ACCOUNT_BUTTON = By.xpath("//p[text()='Личный Кабинет']");
+    private static final By HEAD_TEXT = By.xpath(".//h1[text()='Соберите бургер']");
+    private static final By ROLLS_TAB = By.xpath("//span[text()='Булки']");
+    private static final By ROLLS_TEXT = By.xpath("//h2[text()='Булки']");
+    private static final By SOUCES_TAB = By.xpath("//span[text()='Соусы']");
+    private static final By SOUCES_TEXT = By.xpath("//h2[text()='Соусы']");
+    private static final By FILLINGS_TAB = By.xpath("//span[text()='Начинки']");
+    private static final By FILLINGS_TEXT = By.xpath("//h2[text()='Начинки']");
 
     @Step("Нажатие на кнопку 'Войти в аккаунт'")
     public void clickOnLoginButton() {
-        driver.findElement(loginButton).click();
+        driver.findElement(LOGIN_BUTTON).click();
     }
 
     @Step("Проверка успешности авторизации")
     public boolean isMainPageOpenedWithLogin() {
-        if (driver.findElement(makeOrderButton).isDisplayed()) {
+        if (driver.findElement(MAKE_ORDER_BUTTON).isDisplayed()) {
             return true;
         }
         return false;
@@ -37,51 +37,51 @@ public class MainPage {
 
     @Step("Нажатие на кнопку 'Личный кабинет'")
     public void clickOnAccountButton() {
-        driver.findElement(accountButton).click();
+        driver.findElement(ACCOUNT_BUTTON).click();
     }
 
     @Step("Заголовок 'Соберите бургер' отображается")
     public Boolean isHeadTextOpened() {
-        if (driver.findElement(headText).isDisplayed())  {
+        if (driver.findElement(HEAD_TEXT).isDisplayed())  {
             return true;
         }
         return false;
     }
 
     @Step("Нажатие на вкладку 'Булки'")
-    public void clickOnBunTab() {
-        driver.findElement(rollsTab).click();
+    public void clickOnRollsTab() {
+        driver.findElement(ROLLS_TAB).click();
     }
 
     @Step("Проверка открытия вкладки 'Булки'")
     public boolean isRollsTextOpened() {
-        if (driver.findElement(rollsText).isDisplayed()) {
+        if (driver.findElement(ROLLS_TEXT).isDisplayed()) {
             return true;
         }
         return false;
     }
 
     @Step("Нажатие на вкладку 'Соусы'")
-    public void clickOnSauceTab() {
-        driver.findElement(saucesTab).click();
+    public void clickOnSaucesTab() {
+        driver.findElement(SOUCES_TAB).click();
     }
 
     @Step("Проверка открытия вкладки 'Соусы'")
     public boolean isSaucesTextOpened() {
-        if (driver.findElement(saucesText).isDisplayed()) {
+        if (driver.findElement(SOUCES_TEXT).isDisplayed()) {
             return true;
         }
         return false;
     }
 
     @Step("Нажатие на вкладку 'Начинки'")
-    public void clickOnFillingTab() {
-        driver.findElement(fillingsTab).click();
+    public void clickOnFillingsTab() {
+        driver.findElement(FILLINGS_TAB).click();
     }
 
     @Step("Проверка открытия вкладки 'Начинки'")
     public boolean isFillingsTextOpened() {
-        if (driver.findElement(fillingsText).isDisplayed()) {
+        if (driver.findElement(FILLINGS_TEXT).isDisplayed()) {
             return true;
         }
         return false;

@@ -11,11 +11,11 @@ public class RecoveryPage {
         this.driver = driver;
     }
 
-    private static final By loginButton = By.xpath("//a[text()='Войти']");
+    private static final By LOGIN_BUTTON = By.xpath("//a[text()='Войти']");
 
     @Step("Нажатие на кнопку 'Войти'")
     public void clickOnLoginButton() {
-        driver.findElement(loginButton).click();
+        driver.findElement(LOGIN_BUTTON).click();
     }
 
 }

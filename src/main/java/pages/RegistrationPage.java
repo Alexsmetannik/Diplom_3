@@ -15,29 +15,29 @@ public class RegistrationPage {
         this.driver = driver;
     }
 
-    private static final By registrationHeader = By.xpath("//h2[text()='Регистрация']");
-    private static final By nameField = By.xpath(".//fieldset[1]/div/div/input");
-    private static final By emailField = By.xpath(".//fieldset[2]/div/div/input");
-    private static final By passwordField = By.xpath(".//input[@name='Пароль']");
-    private static final By registrationButton = By.xpath("//button[text()='Зарегистрироваться']");
-    private static final By errorMessage = By.xpath("//p[text()='Некорректный пароль']");
-    private static final By loginButton = By.xpath(".//a[text()='Войти']");
+    private static final By REGISTRATION_HEADER = By.xpath("//h2[text()='Регистрация']");
+    private static final By NAME_FIELD = By.xpath(".//fieldset[1]/div/div/input");
+    private static final By EMAIL_FIELD = By.xpath(".//fieldset[2]/div/div/input");
+    private static final By PASSWORD_FIELD = By.xpath(".//input[@name='Пароль']");
+    private static final By REGISTRATION_BUTTON = By.xpath("//button[text()='Зарегистрироваться']");
+    private static final By ERROR_MESSAGE = By.xpath("//p[text()='Некорректный пароль']");
+    private static final By LOGIN_BUTTON = By.xpath(".//a[text()='Войти']");
 
 
 
     @Step("Регистрация пользователя")
     public void regUser(String name, String email, String password) {
         new WebDriverWait(driver, Duration.ofSeconds(5))
-                .until(ExpectedConditions.visibilityOfElementLocated(registrationHeader));
-        driver.findElement(nameField).sendKeys(name);
-        driver.findElement(emailField).sendKeys(email);
-        driver.findElement(passwordField).sendKeys(password);
-        driver.findElement(registrationButton).click();
+                .until(ExpectedConditions.visibilityOfElementLocated(REGISTRATION_HEADER));
+        driver.findElement(NAME_FIELD).sendKeys(name);
+        driver.findElement(EMAIL_FIELD).sendKeys(email);
+        driver.findElement(PASSWORD_FIELD).sendKeys(password);
+        driver.findElement(REGISTRATION_BUTTON).click();
     }
 
     @Step("Проверка отображения ошибки некорректного пароля")
     public boolean hasErrorMessage() {
-        if (driver.findElement(errorMessage).isDisplayed()) {
+        if (driver.findElement(ERROR_MESSAGE).isDisplayed()) {
             return true;
         }
         return false;
@@ -45,7 +45,7 @@ public class RegistrationPage {
 
     @Step("Нажатие на кнопку 'Войти'")
     public void clickOnLoginButton() {
-        driver.findElement(loginButton).click();
+        driver.findElement(LOGIN_BUTTON).click();
     }
 
 }
