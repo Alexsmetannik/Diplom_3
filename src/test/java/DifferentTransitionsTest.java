@@ -12,7 +12,6 @@ import org.openqa.selenium.WebDriver;
 import pages.AccountPage;
 import pages.LoginPage;
 import pages.MainPage;
-import pages.RegistrationPage;
 import static config.Enviroment.*;
 
 import static org.junit.Assert.assertTrue;
@@ -23,7 +22,6 @@ public class DifferentTransitionsTest {
 
     private String email;
     private String password;
-    private String name;
     private User user;
     private UserClient userClient;
     private String bearerToken;

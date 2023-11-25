@@ -11,7 +11,6 @@ import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import pages.LoginPage;
 import pages.MainPage;
-import pages.RegistrationPage;
 import static config.Enviroment.*;
 
 import static org.junit.Assert.assertTrue;

@@ -10,33 +10,28 @@ public class DriverRule extends ExternalResource {
     protected WebDriver driver;
     private WebDriver chromeDriver;
     private WebDriver yandexDriver;
-    protected enum NameBrowser {
-        YANDEX,
-        CHROME
-    }
 
-      NameBrowser nameBrowser = NameBrowser.CHROME;
-    //    NameBrowser nameBrowser = NameBrowser.YANDEX;
+    String nameBrowser = System.getProperty("nameBrowser");
 
     @Override
     protected void before() {
         this.driver = getDriver(nameBrowser);
 
         switch (nameBrowser) {
-            case CHROME:
+            case "CHROME":
                 System.setProperty("webdriver.http.factory", "jdk-http-client");
-                ChromeDriverService service1 = new ChromeDriverService.Builder()
+                ChromeDriverService service_CHROME = new ChromeDriverService.Builder()
                         .usingDriverExecutable(new File("src/main/resources/chromedriver"))
                         .build();
-                driver = new ChromeDriver(service1);
+                driver = new ChromeDriver(service_CHROME);
                 break;
 
-            case YANDEX:
+            case "YANDEX":
                 System.setProperty("webdriver.http.factory", "jdk-http-client");
-                ChromeDriverService service2 = new ChromeDriverService.Builder()
+                ChromeDriverService service_YANDEX = new ChromeDriverService.Builder()
                         .usingDriverExecutable(new File("src/main/resources/yandexdriver"))
                         .build();
-                driver = new ChromeDriver(service2);
+                driver = new ChromeDriver(service_YANDEX);
                 break;
             default:
                 throw new RuntimeException("Browser is not selected");
@@ -46,7 +41,7 @@ public class DriverRule extends ExternalResource {
 
         }
 
-    private WebDriver getDriver(NameBrowser nameBrowser) {
+    private WebDriver getDriver(String nameBrowser) {
         if ("CHROME".equals(nameBrowser)) {
             return chromeDriver;
         }

@@ -4,15 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4df6422b-50e5-4302-978e-254ff9d8fa3c" name="Changes" comment="fix error with method isDisplayed">
-      <change afterPath="$PROJECT_DIR$/src/main/java/api/LoginUser.java" afterDir="false" />
+    <list default="true" id="4df6422b-50e5-4302-978e-254ff9d8fa3c" name="Changes" comment="add registration users through API">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/api/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/api/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/api/UserClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/api/UserClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/generators/DataGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/generators/DataGenerator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/ConstructorTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ConstructorTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/DifferentTransitionsTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/DifferentTransitionsTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/LoginTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/LoginTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/DriverRule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/DriverRule.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/RegistrationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/RegistrationTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -46,18 +42,19 @@
     <option name="showLibraryContents" value="true" />
     <option name="showMembers" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "last_opened_file_path": "C:/Users/Alex/projects/Diplom/Diplom_3",
-    "project.structure.last.edited": "Facets",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Alex/projects/Diplom/Diplom_3&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Facets&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;terminal&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Alex\projects\Diplom\Diplom_3\src\main\resources" />
@@ -66,7 +63,7 @@
       <recent name="C:\Users\Alex\projects\Diplom\Diplom_3\src\main\resources" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.DifferentTransitionsTest">
+  <component name="RunManager" selected="JUnit.RegistrationTest.successfulRegistrationTest">
     <configuration name="ConstructorTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Diplom_3" />
       <option name="PACKAGE_NAME" value="" />
@@ -110,17 +107,25 @@
       <option name="MAIN_CLASS_NAME" value="RegistrationTest" />
       <option name="METHOD_NAME" value="successfulRegistrationTest" />
       <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea -DnameBrowser=YANDEX" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="JUnit.ConstructorTest" />
+      <item itemvalue="JUnit.DifferentTransitionsTest" />
+      <item itemvalue="JUnit.RegistrationTest" />
+      <item itemvalue="JUnit.RegistrationTest.errorRegistrationIncorrectPasswordTest" />
+      <item itemvalue="JUnit.RegistrationTest.successfulRegistrationTest" />
+    </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.DifferentTransitionsTest" />
-        <item itemvalue="JUnit.ConstructorTest" />
-        <item itemvalue="JUnit.RegistrationTest.errorRegistrationIncorrectPasswordTest" />
         <item itemvalue="JUnit.RegistrationTest.successfulRegistrationTest" />
+        <item itemvalue="JUnit.ConstructorTest" />
         <item itemvalue="JUnit.RegistrationTest" />
+        <item itemvalue="JUnit.DifferentTransitionsTest" />
+        <item itemvalue="JUnit.RegistrationTest.errorRegistrationIncorrectPasswordTest" />
       </list>
     </recent_temporary>
   </component>
@@ -221,7 +226,15 @@
       <option name="project" value="LOCAL" />
       <updated>1700940726691</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="add registration users through API">
+      <option name="closed" value="true" />
+      <created>1700945905636</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1700945905636</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -236,6 +249,11 @@
     <MESSAGE value="add YandexDriver" />
     <MESSAGE value="edit constant names" />
     <MESSAGE value="fix error with method isDisplayed" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix error with method isDisplayed" />
+    <MESSAGE value="add registration users through API" />
+    <option name="LAST_COMMIT_MESSAGE" value="add registration users through API" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

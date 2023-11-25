@@ -32,7 +32,7 @@ public class RegistrationTest {
     private LoginUser login;
     private String bearerToken;
     private String token;
-    private boolean isCreatedUser;
+    private boolean actualResult;
 
     @Before
     public void beforeRegistrationTest(){
@@ -42,12 +42,11 @@ public class RegistrationTest {
         newName = DataGenerator.getNewName();
         user = new User(newEmail, newPassword, newName);
         login = new LoginUser();
-        System.out.println();
     }
 
     @After
     public void deleteUser() {
-        if (isCreatedUser) {
+        if (actualResult) {
             ValidatableResponse responseLogin = userClient.loginUserRequest(login.from(user));
             bearerToken = responseLogin.extract().path("accessToken");
             token = bearerToken.substring(7);
@@ -59,7 +58,6 @@ public class RegistrationTest {
     @DisplayName("Check successful user registration")
     @Description("Успешная регистрация пользователя")
     public void successfulRegistrationTest() {
-        isCreatedUser = true;
         WebDriver driver = driverRule.getDriver();
         driver.get(BASE_URL);
 
@@ -70,7 +68,7 @@ public class RegistrationTest {
         loginPage.clickOnRegistrationButton();
         registrationPage.regUser(newName, newEmail, newPassword);
         loginPage.loginUser(newEmail, newPassword);
-        boolean actualResult = mainPage.isMainPageOpenedWithLogin();
+        actualResult = mainPage.isMainPageOpenedWithLogin();
         assertTrue("User is not login",actualResult);
     }
 
@@ -78,7 +76,6 @@ public class RegistrationTest {
     @DisplayName("Check error during registration for an incorrect password")
     @Description("Проверка ошибки при регистрации для некорректного пароля. Минимальный пароль — шесть символов.")
     public void errorRegistrationIncorrectPasswordTest() {
-        isCreatedUser = false;
         WebDriver driver = driverRule.getDriver();
         driver.get(BASE_URL);
 
@@ -88,7 +85,7 @@ public class RegistrationTest {
         mainPage.clickOnLoginButton();
         loginPage.clickOnRegistrationButton();
         registrationPage.regUser(newName, newEmail, ERROR_PASSWORD);
-        boolean actualResult = registrationPage.hasErrorMessage();
-        assertTrue("Message not exist", actualResult);
+        actualResult = !registrationPage.hasErrorMessage();
+        assertFalse("Message not exist", actualResult);
     }
 }

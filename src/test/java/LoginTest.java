@@ -82,7 +82,7 @@ public class LoginTest {
     @Test
     @DisplayName("Check login by click on RegistrationPage")
     @Description("Вход через кнопку в форме регистрации")
-    public void loginByRegistrationPageTest() throws InterruptedException {
+    public void loginByRegistrationPageTest() {
         WebDriver driver = driverRule.getDriver();
         driver.get(BASE_URL);
 
